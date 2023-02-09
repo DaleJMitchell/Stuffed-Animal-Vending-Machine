@@ -8,5 +8,13 @@ namespace Capstone
     {
         public string AnimalSound { get; } = "Quack, Quack, Splach!";
 
+        public Duck(string slot, string name, decimal price)
+        {
+            Slot = slot;
+            Name = name;
+            Price = price;
+        }
+
+
     }
 }
