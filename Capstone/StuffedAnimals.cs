@@ -30,21 +30,26 @@ namespace Capstone
             {
                 return "SOLD OUT...Please select another item";
             }
-        
         }
 
-
-        
-
-        
-
-        
-
-        
-
-        public void AnimalSound()
+        public void Message()
         {
-
+            if (Type == "Duck")
+            {
+                Console.WriteLine("Quack, Quack, Splash!");
+            }
+            if (Type == "Penguin")
+            {
+                Console.WriteLine("Squawk, Squawk, Whee!");
+            }
+            if (Type == "Cat")
+            {
+                Console.WriteLine("Meow, Meow, Meow!");
+            }
+            if (Type == "Pony")
+            {
+                Console.WriteLine("Neigh, Neigh, Yay!");
+            }
         }
     }
 }

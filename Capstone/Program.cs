@@ -10,9 +10,9 @@ namespace Capstone
 
             VendingMachine unit = new VendingMachine(); //created a new vending machine
             
-            unit.Startup();//running our startup method on "unit"
+            unit.Startup();//running our intial startup method on "unit"
+            unit.ShowHomeScreen();
 
-            Console.WriteLine(unit.inventory);//print our inventory
         }
     }
 }
