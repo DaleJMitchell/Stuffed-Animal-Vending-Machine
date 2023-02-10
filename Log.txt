@@ -2,3 +2,9 @@
 2/10/2023 12:27:29 PM  Yellow Duck  0.90  11.10
 2/10/2023 12:27:40 PM  Calico Cat  3.55  7.55
 2/10/2023 12:27:48 PM  Give Change  7.55  0.00
+2/10/2023 1:37:42 PM  Feed Money  0  12.00
+2/10/2023 1:37:52 PM  Yellow Duck  0.90  11.10
+2/10/2023 1:38:07 PM  Yellow Duck  0.90  10.20
+2/10/2023 1:47:30 PM  Feed Money  0  12.00
+2/10/2023 1:47:54 PM  Pegasus Pony  1.85  10.15
+2/10/2023 1:47:58 PM  Give Change  10.15  0.00

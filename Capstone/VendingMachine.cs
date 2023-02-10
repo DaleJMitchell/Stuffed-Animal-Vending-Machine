@@ -67,7 +67,7 @@ namespace Capstone
         {
             foreach (StuffedAnimals animal in inventory)
             {
-                Console.WriteLine($"{animal.Slot} | {animal.Name} | {animal.Price} | {animal.GetQuanity()}");
+                Console.WriteLine($"{animal.Slot} | {animal.Name} | {animal.Price} | {animal.ShowQuanity()}");
             }
             ShowHomeScreen();
         }
@@ -76,7 +76,7 @@ namespace Capstone
         decimal currentMoney = 0.00M;
 
 
-        public void Purchase()
+        public void Purchase()//can be tested
         {
             Console.WriteLine($"Current money provided: {currentMoney}");
             Console.WriteLine("1) Feed Money");
@@ -102,7 +102,7 @@ namespace Capstone
             else if (userInput == "3")
             {
                 
-                FinishTransaction();
+                GiveChange();
                 
 
             }
@@ -279,15 +279,6 @@ namespace Capstone
                 Console.WriteLine("We have a problem. Please try again :)");
                 Console.WriteLine(ex.Message);
             }
-        }
-
-
-
-
-
-        public void FinishTransaction()
-        {
-            GiveChange();
         }
 
 

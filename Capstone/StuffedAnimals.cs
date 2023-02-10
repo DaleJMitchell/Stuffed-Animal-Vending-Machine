@@ -20,15 +20,17 @@ namespace Capstone
             Type= type;
         }
 
-        public string GetQuanity() 
+        public string ShowQuanity() //can be tested
         {
             if (Quantity > 0)
             {                 
-                return $"There are {Quantity} {Type}(s) remaining";
+                string message = $"There are {Quantity} {Type}(s) remaining";
+                return message;                
             }
-            else 
+            else
             {
-                return "SOLD OUT...Please select another item";
+                string soldOut = "SOLD OUT...Please select another item";
+                return soldOut;
             }
         }
 
