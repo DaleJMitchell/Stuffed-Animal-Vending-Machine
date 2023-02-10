@@ -9,6 +9,9 @@ namespace Capstone
 {
     public class VendingMachine
     {
+        string transName;
+        decimal movingMoney;
+
         public int InventoryQuantity { get; set; }
 
         public List<StuffedAnimals> inventory = new List<StuffedAnimals>();//possible for loop look for 3rd index for type 
@@ -16,7 +19,7 @@ namespace Capstone
         public void Startup()
         {
             string filePath = @"C:\Users\Student\workspace\c-sharp-minicapstonemodule1-team0\vendingmachine.csv"; //this is our inv.txt where all our items live
-            try
+            try               
             {
                 using (StreamReader sr = new StreamReader(filePath))//read our filepath
                 {
@@ -66,7 +69,7 @@ namespace Capstone
             {
                 Console.WriteLine($"{animal.Slot} | {animal.Name} | {animal.Price} | {animal.GetQuanity()}");
             }
-            ShowHomeScreen(); 
+            ShowHomeScreen();
         }
 
 
@@ -98,14 +101,19 @@ namespace Capstone
             }
             else if (userInput == "3")
             {
+                
                 FinishTransaction();
+                
 
             }
         }
 
         public void FeedMoney()
         {
+
             int dollarInput = 0;
+            transName = "Feed Money";
+            movingMoney = dollarInput;
             Console.WriteLine("Please enter currency in whole dollar amounts:");
             try
             {
@@ -118,6 +126,7 @@ namespace Capstone
             finally
             {
                 currentMoney += dollarInput;
+                LogTransaction();
                 Purchase();
             }
         }
@@ -127,7 +136,7 @@ namespace Capstone
             DisplayInventory();
             Console.WriteLine("Please choose an item (i.e. D2):");
             string userInput = Console.ReadLine();
-            userInput= userInput.ToUpper(); 
+            userInput = userInput.ToUpper();
 
             Dictionary<string, StuffedAnimals> animalDict = new Dictionary<string, StuffedAnimals>();
 
@@ -149,14 +158,17 @@ namespace Capstone
             {
                 Console.WriteLine($"{animal.Name} sold out.");
             }
-            else if(currentMoney <animal.Price)
+            else if (currentMoney < animal.Price)
             {
-                Console.WriteLine("Insufficient funds, add money or select new option."); 
+                Console.WriteLine("Insufficient funds, add money or select new option.");
             }
             else
             {
                 Console.WriteLine("Please choose a valid item.");
             }
+            transName = animal.Name;
+            movingMoney = animal.Price;
+            LogTransaction();
             Purchase();
         }
 
@@ -182,36 +194,37 @@ namespace Capstone
         int numberDollars = 0;
         int numberQuarters = 0;
         int numberDimes = 0;
-        int numberNickels = 0; 
-        
+        int numberNickels = 0;
+
         public void GiveChange()
         {
-            while(currentMoney > 0M)
+            decimal beforeChange = currentMoney;
+            while (currentMoney > 0M)
             {
-                if(currentMoney >= 1.00M)
+                if (currentMoney >= 1.00M)
                 {
-                    currentMoney -= 1.00M; 
-                    numberDollars++; 
+                    currentMoney -= 1.00M;
+                    numberDollars++;
                 }
-               else if (currentMoney < 1.00M && currentMoney >= .25M)
+                else if (currentMoney < 1.00M && currentMoney >= .25M)
                 {
                     currentMoney -= .25M;
                     numberQuarters++;
                 }
-                else if (currentMoney <.25M && currentMoney >= .10M)
+                else if (currentMoney < .25M && currentMoney >= .10M)
                 {
                     currentMoney -= .10M;
                     numberDimes++;
-                
+
                 }
-               else if (currentMoney < .10M && currentMoney >=.05M)
+                else if (currentMoney < .10M && currentMoney >= .05M)
                 {
                     currentMoney -= .05M;
                     numberNickels++;
                 }
                 else
                 {
-                    currentMoney = currentMoney; 
+                    currentMoney = currentMoney;
                 }
             }
             string heresYourChange = "Your change is ";
@@ -232,18 +245,49 @@ namespace Capstone
                 heresYourChange += $"{numberNickels} nickels";
             }
             Console.WriteLine($"{heresYourChange} ");
-            Console.WriteLine($"Current Balance: {currentMoney}"); 
-            ShowHomeScreen(); 
+            Console.WriteLine($"Current Balance: {currentMoney}");
+            transName = "Give Change";
+            movingMoney = beforeChange;
+            LogTransaction();
+            ShowHomeScreen();
+
         }
-        
-        
-        
-        
-        
-        
+
+        //string directory = Environment.CurrentDirectory;
+        //string filename = "programminglanguages.txt";
+        //string path = Path.Combine(directory, filename);
+        public void LogTransaction()
+        {
+
+
+            try
+            {
+
+                using (StreamWriter sw = new StreamWriter(@"C:\Users\Student\workspace\c-sharp-minicapstonemodule1-team0\Log.txt", true))
+                {
+
+
+
+
+                    sw.WriteLine($"{DateTime.Now}  {transName}  {movingMoney}  {currentMoney}");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("We have a problem. Please try again :)");
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+
+
+
+
         public void FinishTransaction()
         {
-            GiveChange(); 
+            GiveChange();
         }
 
 
