@@ -9,8 +9,7 @@ namespace Capstone
 {
     public class VendingMachine
     {
-        string transName;
-        decimal movingMoney;
+
 
         public int InventoryQuantity { get; set; }
 
@@ -18,10 +17,15 @@ namespace Capstone
 
         public void Startup()
         {
-            string filePath = @"C:\Users\Student\workspace\c-sharp-minicapstonemodule1-team0\vendingmachine.csv"; //this is our inv.txt where all our items live
+            //string filePath = @"C:\Users\Student\workspace\c-sharp-minicapstonemodule1-team0\vendingmachine.csv"; //this is our inv.txt where all our items live
+            string directory = Environment.CurrentDirectory;
+            //Console.WriteLine(directory);
+            string fileName = "vendingmachine.csv";
+            string fullPath = Path.Combine(directory, fileName);
+
             try               
             {
-                using (StreamReader sr = new StreamReader(filePath))//read our filepath
+                using (StreamReader sr = new StreamReader(fullPath))//read our filepath
                 {
 
                     while (!sr.EndOfStream)
@@ -34,9 +38,9 @@ namespace Capstone
                     }
                 }
             }
-            catch (Exception ex)
+            catch (IOException ex)
             {
-                Console.WriteLine("oops try again");
+                Console.WriteLine("oops make sure your file path & CSV are nice and clean");
                 Console.WriteLine(ex.Message);
             }
             Console.WriteLine("Welcome to Vendo-Matic 800");
@@ -108,6 +112,8 @@ namespace Capstone
             }
         }
 
+        string transName;
+        decimal movingMoney;
         public void FeedMoney()
         {
 
@@ -151,10 +157,10 @@ namespace Capstone
             {
                 animal.Quantity--;
                 Console.WriteLine($"{animal.Name} | {animal.Price} | current money: {currentMoney}");
-                animal.Message();
+                Console.WriteLine($"{animal.Message}");
                 currentMoney -= animal.Price;
             }
-            else if (animal.Quantity == 0)
+            else if (animal.Quantity <= 0)
             {
                 Console.WriteLine($"{animal.Name} sold out.");
             }

@@ -11,6 +11,32 @@ namespace Capstone
         public decimal Price { get; set; }
         public string Type { get; set; }
         public int Quantity { get; set; } = 5;
+        public string Message 
+        {
+            get
+            {
+                if (Type == "Duck")
+                {
+                    return "Quack, Quack, Splash!";
+                }
+                else if (Type == "Penguin")
+                {
+                    return "Squawk, Squawk, Whee!";
+                }
+                else if (Type == "Cat")
+                {
+                    return "Meow, Meow, Meow!";
+                }
+                else if (Type == "Pony")
+                {
+                    return "Neigh, Neigh, Yay!";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
 
         public StuffedAnimals(string slot, string name, decimal price, string type) 
         { 
@@ -31,26 +57,6 @@ namespace Capstone
             {
                 string soldOut = "SOLD OUT...Please select another item";
                 return soldOut;
-            }
-        }
-
-        public void Message()
-        {
-            if (Type == "Duck")
-            {
-                Console.WriteLine("Quack, Quack, Splash!");
-            }
-            if (Type == "Penguin")
-            {
-                Console.WriteLine("Squawk, Squawk, Whee!");
-            }
-            if (Type == "Cat")
-            {
-                Console.WriteLine("Meow, Meow, Meow!");
-            }
-            if (Type == "Pony")
-            {
-                Console.WriteLine("Neigh, Neigh, Yay!");
             }
         }
     }

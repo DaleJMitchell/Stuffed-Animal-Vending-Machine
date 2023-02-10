@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Capstone
 {
-    public class Dollar: ISpendable 
+    public class BackEnd : VendingMachine
     {
-        public decimal Value { get; } = 1.00M; 
+
     }
 }

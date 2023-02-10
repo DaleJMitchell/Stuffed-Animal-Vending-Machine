@@ -8,3 +8,8 @@
 2/10/2023 1:47:30 PM  Feed Money  0  12.00
 2/10/2023 1:47:54 PM  Pegasus Pony  1.85  10.15
 2/10/2023 1:47:58 PM  Give Change  10.15  0.00
+2/10/2023 3:25:44 PM  Feed Money  0  24.00
+2/10/2023 3:26:01 PM  Feed Money  0  23.00
+2/10/2023 3:26:09 PM  White Cat  2.50  20.50
+2/10/2023 3:59:01 PM  Feed Money  0  1.00
+2/10/2023 3:59:08 PM  Cube Duck  2.50  -1.50
