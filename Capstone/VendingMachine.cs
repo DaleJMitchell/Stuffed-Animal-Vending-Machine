@@ -66,6 +66,7 @@ namespace Capstone
             {
                 Console.WriteLine($"{animal.Slot} | {animal.Name} | {animal.Price} | {animal.GetQuanity()}");
             }
+            ShowHomeScreen(); 
         }
 
 
@@ -98,6 +99,7 @@ namespace Capstone
             else if (userInput == "3")
             {
                 FinishTransaction();
+
             }
         }
 
@@ -125,6 +127,7 @@ namespace Capstone
             DisplayInventory();
             Console.WriteLine("Please choose an item (i.e. D2):");
             string userInput = Console.ReadLine();
+            userInput= userInput.ToUpper(); 
 
             Dictionary<string, StuffedAnimals> animalDict = new Dictionary<string, StuffedAnimals>();
 
@@ -145,6 +148,10 @@ namespace Capstone
             else if (animal.Quantity == 0)
             {
                 Console.WriteLine($"{animal.Name} sold out.");
+            }
+            else if(currentMoney <animal.Price)
+            {
+                Console.WriteLine("Insufficient funds, add money or select new option."); 
             }
             else
             {
@@ -172,9 +179,71 @@ namespace Capstone
         //    {
         //        Console.WriteLine("Please choose a valid item.");
         //    }
+        int numberDollars = 0;
+        int numberQuarters = 0;
+        int numberDimes = 0;
+        int numberNickels = 0; 
+        
+        public void GiveChange()
+        {
+            while(currentMoney > 0M)
+            {
+                if(currentMoney >= 1.00M)
+                {
+                    currentMoney -= 1.00M; 
+                    numberDollars++; 
+                }
+               else if (currentMoney < 1.00M && currentMoney >= .25M)
+                {
+                    currentMoney -= .25M;
+                    numberQuarters++;
+                }
+                else if (currentMoney <.25M && currentMoney >= .10M)
+                {
+                    currentMoney -= .10M;
+                    numberDimes++;
+                
+                }
+               else if (currentMoney < .10M && currentMoney >=.05M)
+                {
+                    currentMoney -= .05M;
+                    numberNickels++;
+                }
+                else
+                {
+                    currentMoney = currentMoney; 
+                }
+            }
+            string heresYourChange = "Your change is ";
+            if (numberDollars > 0)
+            {
+                heresYourChange += $"{numberDollars} dollars ";
+            }
+            if (numberQuarters > 0)
+            {
+                heresYourChange += $"{numberQuarters} quarters ";
+            }
+            if (numberDimes > 0)
+            {
+                heresYourChange += $"{numberDimes} dimes ";
+            }
+            if (numberNickels > 0)
+            {
+                heresYourChange += $"{numberNickels} nickels";
+            }
+            Console.WriteLine($"{heresYourChange} ");
+            Console.WriteLine($"Current Balance: {currentMoney}"); 
+            ShowHomeScreen(); 
+        }
+        
+        
+        
+        
+        
+        
         public void FinishTransaction()
         {
-
+            GiveChange(); 
         }
 
 
