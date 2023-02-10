@@ -39,7 +39,7 @@ namespace Capstone
             Console.WriteLine("Welcome to Vendo-Matic 800");
         }
 
-        public void ShowHomeScreen() 
+        public void ShowHomeScreen()
         {
             Console.WriteLine("Hello! Please select 1, 2, 3:");
             Console.WriteLine("1) Display Items");
@@ -63,22 +63,30 @@ namespace Capstone
         public void DisplayInventory()
         {
             foreach (StuffedAnimals animal in inventory)
-                {
-                    Console.WriteLine($"{animal.Slot} | {animal.Name} | {animal.Price} | {animal.GetQuanity()}");
-                }
+            {
+                Console.WriteLine($"{animal.Slot} | {animal.Name} | {animal.Price} | {animal.GetQuanity()}");
+            }
         }
-        
-        
+
+
         decimal currentMoney = 0.00M;
 
 
         public void Purchase()
         {
-            Console.WriteLine($"Current money provided: {currentMoney}"); 
+            Console.WriteLine($"Current money provided: {currentMoney}");
             Console.WriteLine("1) Feed Money");
             Console.WriteLine("2) Select Product");
             Console.WriteLine("3) Finish Transation");
             string userInput = Console.ReadLine();
+
+            //Dictionary<string, StuffedAnimals> animalDict = new Dictionary<string, StuffedAnimals>();
+
+            //foreach (StuffedAnimals animal in inventory)
+            //{
+            //    animalDict.Add(animal.Slot, animal);
+            //}
+
             if (userInput == "1")
             {
                 FeedMoney();
@@ -117,29 +125,53 @@ namespace Capstone
             DisplayInventory();
             Console.WriteLine("Please choose an item (i.e. D2):");
             string userInput = Console.ReadLine();
-            foreach (StuffedAnimals animal in inventory)
-            {
-                if (userInput == animal.Slot)
-                {
-                    animal.Quantity--;
-                    Console.WriteLine($"{animal.Name} | {animal.Price} | current money: {currentMoney}");
-                    animal.Message();
-                    currentMoney -= animal.Price;
-                }
-                else if (animal.Quantity == 0)
-                {
-                    Console.WriteLine($"{animal.Name} sold out.");
-                }
-                else
-                {
-                    Console.WriteLine("Please choose a valid item.");
-                }
-                Purchase();
-            }
-        }
-        //Getting stuck on A1, not looping through
-        //We can buy even if we're sold out.........uhhhhhh.....
 
+            Dictionary<string, StuffedAnimals> animalDict = new Dictionary<string, StuffedAnimals>();
+
+            foreach (StuffedAnimals singleAnimal in inventory)
+            {
+                animalDict.Add(singleAnimal.Slot, singleAnimal);
+            }
+
+            StuffedAnimals animal = animalDict[userInput];
+
+            if (userInput == animal.Slot && animal.Quantity > 0)
+            {
+                animal.Quantity--;
+                Console.WriteLine($"{animal.Name} | {animal.Price} | current money: {currentMoney}");
+                animal.Message();
+                currentMoney -= animal.Price;
+            }
+            else if (animal.Quantity == 0)
+            {
+                Console.WriteLine($"{animal.Name} sold out.");
+            }
+            else
+            {
+                Console.WriteLine("Please choose a valid item.");
+            }
+            Purchase();
+        }
+
+
+
+        //foreach (StuffedAnimals animal in inventory)
+        //{
+        //    if (userInput == animal.Slot)
+        //    {
+        //        animal.Quantity--;
+        //        Console.WriteLine($"{animal.Name} | {animal.Price} | current money: {currentMoney}");
+        //        animal.Message();
+        //        currentMoney -= animal.Price;
+        //    }
+        //    else if (animal.Quantity == 0)
+        //    {
+        //        Console.WriteLine($"{animal.Name} sold out.");
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("Please choose a valid item.");
+        //    }
         public void FinishTransaction()
         {
 
@@ -152,15 +184,7 @@ namespace Capstone
 
             //maybe find a way to make the console close automatically later.........Environment.Exit(0);
         }
-
-
-            
-        
-
-
-
-
-
-
     }
 }
+//Getting stuck on A1, not looping through
+//We can buy even if we're sold out.........uhhhhhh.....
